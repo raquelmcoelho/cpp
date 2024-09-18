@@ -1,3 +1,8 @@
+1 Échauffement (sans ordinateur, répondre dans README.txt)
+Qu’affiche le code du listing 1 sur sa sortie standard ?
+Expliquez ce qui se produit à la ligne 6, 7 et 8.
+
+
 il affiche "x vaut 5"
 dans la ligne 6 est fait une reference de la variable x
 ensuite le r reçois le value de la variable y

@@ -1,42 +1,46 @@
 #include <iostream>
 #include "book.h"
 
-int Book::read()
+int MyNamespace1::read()
 {
   int n;
   do
   {
-    std::cout << "insert the number of pages (from 2 to 2000):\n";
+    std::cout << "\tinsert the number of pages (from 2 to 2000):";
     std::cin >> n;
   } while (n > 2000 || n < 2);
   return n;
 }
 
-int Book::read(int *n)
+int MyNamespace1::read(int *n)
 {
   do
   {
-    std::cout << "insert the number of pages (from 2 to 2000):\n";
+    std::cout << "\tinsert the number of pages (from 2 to 2000):";
     std::cin >> *n;
   } while (*n > 2000 || *n < 2);
+
+  return *n;
 }
 
-int Book::read1(int n)
+int MyNamespace1::read(int n)
 {
   do
   {
-    std::cout << "insert the number of pages (from 2 to 2000):\n";
+    std::cout << "\tinsert the number of pages (from 2 to 2000):";
     std::cin >> n;
   } while (n > 2000 || n < 2);
+
+  return n;
 }
 
-// namespace value{
-int Book::read(int &n)
+int MyNamespace2::read(int &n)
 {
   do
   {
-    std::cout << "insert the number of pages (from 2 to 2000):\n";
+    std::cout << "\tinsert the number of pages (from 2 to 2000):";
     std::cin >> n;
   } while (n > 2000 || n < 2);
+
+  return n;
 }
-// }

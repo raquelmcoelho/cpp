@@ -1,17 +1,16 @@
 CXX = g++
-CXXFLAGS = -pedantic -std=c++11 -Wall -Wextra
-LINK.o = $(LINK.cc)
+CXXFLAGS = -W -Wall -pedantic -std=c++17
+TARGET = out
+OBJ = main.o book.o
 
-.PHONY: all clean
+$(TARGET): $(OBJ)
+	$(CXX) $(CXXFLAGS) -o $@ $(OBJ)
 
-all: main
+main.o: main.cpp book.h
+	$(CXX) $(CXXFLAGS) -c main.cpp
 
-main: main.o
-
-main.o: main.cpp
-
-%.o: %.cpp %.h
-	$(CXX) $(CXXFLAGS) -c $< -o $@
+book.o: book.cpp book.h
+	$(CXX) $(CXXFLAGS) -c book.cpp
 
 clean:
-	rm -f main *.o
+	rm -f *.o *~ $(TARGET)
