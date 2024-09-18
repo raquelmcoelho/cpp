@@ -6,9 +6,11 @@
 struct Book
 {
 public:
-    char title[50];
-    int pagesAmount;
+    char _title[50];
+    int _pagesAmount;
 
+    Book(char title[50], int pagesAmount);
+    static Book createByInput();
     // int read();
     // int read(int n);
     // int read(int *n);
