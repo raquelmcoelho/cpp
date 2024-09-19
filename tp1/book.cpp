@@ -77,25 +77,17 @@ Book::Book(const char newTitle[50], int newPagesAmount)
   pagesAmount = newPagesAmount;
 }
 
-Book *createBookGroup(int n)
+void fillBookGroup(Book bookGroup[], int n)
 {
-  Book *bookGroup = new Book[n];
   while (n--)
   {
     bookGroup[n] = createBookByInput();
   }
-
-  return bookGroup;
 }
 
-/*
-2.3 Affichage
-Programmez une fonction qui affiche un livre donné en argument, et une fonction qui
-affiche tous les livres d’un tableau (donné avec sa taille).
-*/
-void Book::display()
+void display(Book book)
 {
-  std::cout << "| Title: " << title << " | Pages: " << pagesAmount << std::endl;
+  std::cout << "| Title: " << book.title << " | Pages: " << book.pagesAmount << std::endl;
 }
 
 void displayBookGroup(Book bookGroup[], int size)
@@ -104,7 +96,7 @@ void displayBookGroup(Book bookGroup[], int size)
   for (int i = 0; i < size; ++i)
   {
     std::cout << "Book " << i + 1 << std::endl;
-    bookGroup[i].display();
+    display(bookGroup[i]);
   }
   std::cout << std::endl;
 }
