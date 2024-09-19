@@ -39,7 +39,9 @@ Book createBookByInput();
 Book *createBookGroup(int n);
 void displayBookGroup(Book bookGroup[], int size);
 void swapPageAmounts(Book &book1, Book &book2);
-Book getMaxPageAmount(Book books[], int size);
-Book getMinPageAmount(Book books[], int size);
+Book &getMaxPageAmount(Book books[], int size);
+Book &getMinPageAmount(Book books[], int size);
+void joke(Book books[], int size);
+void jokeAgain(Book books[], int size);
 
 #endif

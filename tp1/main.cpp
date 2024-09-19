@@ -27,6 +27,11 @@ int main()
         Book("F", 98),
     };
 
-    getMaxPageAmount(bookGroups, sizeof(bookGroups) / sizeof(Book)).display();
-    getMinPageAmount(bookGroups, sizeof(bookGroups) / sizeof(Book)).display();
+    displayBookGroup(bookGroups, sizeof(bookGroups) / sizeof(Book));
+    joke(bookGroups, sizeof(bookGroups) / sizeof(Book));
+    displayBookGroup(bookGroups, sizeof(bookGroups) / sizeof(Book));
+    jokeAgain(bookGroups, sizeof(bookGroups) / sizeof(Book));
+    displayBookGroup(bookGroups, sizeof(bookGroups) / sizeof(Book));
+
+    swapPageAmounts(createBookByInput(), createBookByInput());
 }

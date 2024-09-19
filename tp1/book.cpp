@@ -2,6 +2,50 @@
 #include "book.h"
 #include <string.h>
 
+int readAmountOfPages()
+{
+  int n;
+  do
+  {
+    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
+    std::cin >> n;
+  } while (n > 2000 || n < 2);
+  return n;
+}
+
+int readAmountOfPages(int *n)
+{
+  do
+  {
+    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
+    std::cin >> *n;
+  } while (*n > 2000 || *n < 2);
+
+  return *n;
+}
+
+int MyNamespace1::readAmountOfPages(int n)
+{
+  do
+  {
+    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
+    std::cin >> n;
+  } while (n > 2000 || n < 2);
+
+  return n;
+}
+
+int MyNamespace2::readAmountOfPages(int &n)
+{
+  do
+  {
+    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
+    std::cin >> n;
+  } while (n > 2000 || n < 2);
+
+  return n;
+}
+
 Book::Book()
 {
   strcpy(title, "empty");
@@ -56,11 +100,13 @@ void Book::display()
 
 void displayBookGroup(Book bookGroup[], int size)
 {
+  std::cout << std::endl;
   for (int i = 0; i < size; ++i)
   {
     std::cout << "Book " << i + 1 << std::endl;
     bookGroup[i].display();
   }
+  std::cout << std::endl;
 }
 
 void swapPageAmounts(Book &book1, Book &book2)
@@ -68,7 +114,7 @@ void swapPageAmounts(Book &book1, Book &book2)
   std::swap(book1.pagesAmount, book2.pagesAmount);
 }
 
-Book getMaxPageAmount(Book books[], int size)
+Book &getMaxPageAmount(Book books[], int size)
 {
   int max = INT16_MIN;
   int indexOfMax = -1;
@@ -85,7 +131,7 @@ Book getMaxPageAmount(Book books[], int size)
   return books[indexOfMax];
 }
 
-Book getMinPageAmount(Book books[], int size)
+Book &getMinPageAmount(Book books[], int size)
 {
   int min = INT16_MAX;
   int indexOfMin = -1;
@@ -101,46 +147,21 @@ Book getMinPageAmount(Book books[], int size)
 
   return books[indexOfMin];
 }
-int readAmountOfPages()
+
+void joke(Book books[], int size)
 {
-  int n;
-  do
-  {
-    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
-    std::cin >> n;
-  } while (n > 2000 || n < 2);
-  return n;
+  swapPageAmounts(
+      getMaxPageAmount(books, size),
+      getMinPageAmount(books, size));
 }
 
-int readAmountOfPages(int *n)
+void jokeAgain(Book books[], int size)
 {
-  do
-  {
-    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
-    std::cin >> *n;
-  } while (*n > 2000 || *n < 2);
 
-  return *n;
-}
+  Book &max = getMaxPageAmount(books, size);
+  Book &min = getMinPageAmount(books, size);
 
-int MyNamespace1::readAmountOfPages(int n)
-{
-  do
-  {
-    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
-    std::cin >> n;
-  } while (n > 2000 || n < 2);
-
-  return n;
-}
-
-int MyNamespace2::readAmountOfPages(int &n)
-{
-  do
-  {
-    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
-    std::cin >> n;
-  } while (n > 2000 || n < 2);
-
-  return n;
+  swapPageAmounts(
+      max,
+      min);
 }
