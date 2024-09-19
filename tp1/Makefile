@@ -1,5 +1,5 @@
 CXX = g++
-CXXFLAGS = -W -Wall -pedantic -std=c++17
+CXXFLAGS = -W -Wall -pedantic -std=c++11
 TARGET = out
 OBJ = main.o book.o
 

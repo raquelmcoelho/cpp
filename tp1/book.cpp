@@ -2,76 +2,145 @@
 #include "book.h"
 #include <string.h>
 
-int MyNamespace1::read()
+Book::Book()
+{
+  strcpy(title, "empty");
+  pagesAmount = 0;
+}
+
+Book createBookByInput()
+{
+  std::string title;
+  int pagesAmount;
+
+  do
+  {
+    std::cout << "Insert the right length (max 50 characters) title of the book:" << std::endl;
+    std::cin >> title;
+    // TODO: check if the title is not empty and has less than 50 characters and has no spaces
+  } while (title.length() > 50);
+
+  pagesAmount = readAmountOfPages();
+  // TODO: check if is a number and if estoura bitsegmentation fault
+
+  return Book(title.c_str(), pagesAmount);
+}
+
+Book::Book(const char newTitle[50], int newPagesAmount)
+{
+  strcpy(title, newTitle);
+  // TODO: check size validation
+  pagesAmount = newPagesAmount;
+}
+
+Book *createBookGroup(int n)
+{
+  Book *bookGroup = new Book[n];
+  while (n--)
+  {
+    bookGroup[n] = createBookByInput();
+  }
+
+  return bookGroup;
+}
+
+/*
+2.3 Affichage
+Programmez une fonction qui affiche un livre donné en argument, et une fonction qui
+affiche tous les livres d’un tableau (donné avec sa taille).
+*/
+void Book::display()
+{
+  std::cout << "| Title: " << title << " | Pages: " << pagesAmount << std::endl;
+}
+
+void displayBookGroup(Book bookGroup[], int size)
+{
+  for (int i = 0; i < size; ++i)
+  {
+    std::cout << "Book " << i + 1 << std::endl;
+    bookGroup[i].display();
+  }
+}
+
+void swapPageAmounts(Book &book1, Book &book2)
+{
+  std::swap(book1.pagesAmount, book2.pagesAmount);
+}
+
+Book getMaxPageAmount(Book books[], int size)
+{
+  int max = INT16_MIN;
+  int indexOfMax = -1;
+
+  for (int i = 0; i < size; ++i)
+  {
+    if (books[i].pagesAmount > max)
+    {
+      max = books[i].pagesAmount;
+      indexOfMax = i;
+    }
+  }
+
+  return books[indexOfMax];
+}
+
+Book getMinPageAmount(Book books[], int size)
+{
+  int min = INT16_MAX;
+  int indexOfMin = -1;
+
+  for (int i = 0; i < size; ++i)
+  {
+    if (books[i].pagesAmount < min)
+    {
+      min = books[i].pagesAmount;
+      indexOfMin = i;
+    }
+  }
+
+  return books[indexOfMin];
+}
+int readAmountOfPages()
 {
   int n;
   do
   {
-    std::cout << "\tinsert the number of pages (from 2 to 2000):";
+    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
     std::cin >> n;
   } while (n > 2000 || n < 2);
   return n;
 }
 
-int MyNamespace1::read(int *n)
+int readAmountOfPages(int *n)
 {
   do
   {
-    std::cout << "\tinsert the number of pages (from 2 to 2000):";
+    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
     std::cin >> *n;
   } while (*n > 2000 || *n < 2);
 
   return *n;
 }
 
-int MyNamespace1::read(int n)
+int MyNamespace1::readAmountOfPages(int n)
 {
   do
   {
-    std::cout << "\tinsert the number of pages (from 2 to 2000):";
+    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
     std::cin >> n;
   } while (n > 2000 || n < 2);
 
   return n;
 }
 
-int MyNamespace2::read(int &n)
+int MyNamespace2::readAmountOfPages(int &n)
 {
   do
   {
-    std::cout << "\tinsert the number of pages (from 2 to 2000):";
+    std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
     std::cin >> n;
   } while (n > 2000 || n < 2);
 
   return n;
-}
-
-Book Book::createByInput()
-{
-  char title;
-  int pagesAmount;
-
-  std::cout << "Insert the title of the book: ";
-  std::cin >> title;
-  // TODO: validar o tamanho da entrada
-  std::cout << "Insert the amount of pages of the book: ";
-  std::cin >> pagesAmount;
-
-  return Book(title, pagesAmount);
-}
-
-Book::Book(char title[50], int pagesAmount)
-{
-  strcpy(_title, title);
-  _pagesAmount = pagesAmount;
-}
-
-
-void Book::createBookGroup(int n) {
-  Book bookGroup[n];
-  while(n--){
-    std::cout << "Write the name of the next book to put inside bookGroup:";
-    std::cin >> bookGroup[n];
-    std::cout << endl;
-  }
 }

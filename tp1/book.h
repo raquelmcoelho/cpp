@@ -3,32 +3,43 @@
 
 #include <iostream>
 
+/*
+2. Programmation : Livres
+ Nous allons manipuler une structure représentant des livres. Rien de très compliqué :
+seuls les titres et nombres de pages nous intéressent.
+*/
+
 struct Book
 {
 public:
-    char _title[50];
-    int _pagesAmount;
+    char title[50];
+    int pagesAmount;
 
-    Book(char title[50], int pagesAmount);
-    static Book createByInput();
-    // int read();
-    // int read(int n);
-    // int read(int *n);
-    // int read(int &n);
+    Book();
+    Book(const char newTitle[50], int newPagesAmount);
 
-    void createBookGroup(int n);
+    void display();
 };
+
+int readAmountOfPages();
+int readAmountOfPages(int *n);
 
 namespace MyNamespace1
 {
-    int read();
-    int read(int *n);
-    int read(int n);
+
+    int readAmountOfPages(int n);
 }
 
 namespace MyNamespace2
 {
-    int read(int &n);
+    int readAmountOfPages(int &n);
 }
+
+Book createBookByInput();
+Book *createBookGroup(int n);
+void displayBookGroup(Book bookGroup[], int size);
+void swapPageAmounts(Book &book1, Book &book2);
+Book getMaxPageAmount(Book books[], int size);
+Book getMinPageAmount(Book books[], int size);
 
 #endif
