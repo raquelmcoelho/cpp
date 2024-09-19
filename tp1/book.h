@@ -15,6 +15,8 @@ public:
     // int read(int n);
     // int read(int *n);
     // int read(int &n);
+
+    void createBookGroup(int n);
 };
 
 namespace MyNamespace1

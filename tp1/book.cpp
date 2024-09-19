@@ -53,6 +53,7 @@ Book Book::createByInput()
 
   std::cout << "Insert the title of the book: ";
   std::cin >> title;
+  // TODO: validar o tamanho da entrada
   std::cout << "Insert the amount of pages of the book: ";
   std::cin >> pagesAmount;
 
@@ -63,4 +64,14 @@ Book::Book(char title[50], int pagesAmount)
 {
   strcpy(_title, title);
   _pagesAmount = pagesAmount;
+}
+
+
+void Book::createBookGroup(int n) {
+  Book bookGroup[n];
+  while(n--){
+    std::cout << "Write the name of the next book to put inside bookGroup:";
+    std::cin >> bookGroup[n];
+    std::cout << endl;
+  }
 }
