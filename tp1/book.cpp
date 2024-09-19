@@ -2,6 +2,18 @@
 #include "book.h"
 #include <string.h>
 
+Book::Book()
+{
+  strcpy(title, "-");
+  pagesAmount = MIN_PAGE;
+}
+
+Book::Book(const char newTitle[MAX_TITLE], int newPagesAmount)
+{
+  strcpy(title, newTitle);
+  pagesAmount = isPageAmountValid(newPagesAmount) ? newPagesAmount : MIN_PAGE;
+}
+
 int readAmountOfPages()
 {
   int n;
@@ -9,7 +21,7 @@ int readAmountOfPages()
   {
     std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
     std::cin >> n;
-  } while (n > 2000 || n < 2);
+  } while (!isPageAmountValid(n));
   return n;
 }
 
@@ -19,7 +31,7 @@ int readAmountOfPages(int *n)
   {
     std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
     std::cin >> *n;
-  } while (*n > 2000 || *n < 2);
+  } while (!isPageAmountValid(*n));
 
   return *n;
 }
@@ -30,7 +42,7 @@ int MyNamespace1::readAmountOfPages(int n)
   {
     std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
     std::cin >> n;
-  } while (n > 2000 || n < 2);
+  } while (!isPageAmountValid(n));
 
   return n;
 }
@@ -41,15 +53,9 @@ int MyNamespace2::readAmountOfPages(int &n)
   {
     std::cout << "insert the number of pages (from 2 to 2000):" << std::endl;
     std::cin >> n;
-  } while (n > 2000 || n < 2);
+  } while (!isPageAmountValid(n));
 
   return n;
-}
-
-Book::Book()
-{
-  strcpy(title, "empty");
-  pagesAmount = 0;
 }
 
 Book createBookByInput()
@@ -59,22 +65,19 @@ Book createBookByInput()
 
   do
   {
-    std::cout << "Insert the right length (max 50 characters) title of the book:" << std::endl;
+    std::cout
+        << "Insert the right length (max "
+        << MAX_TITLE
+        << " characters) title of the book:"
+        << std::endl;
+
     std::cin >> title;
-    // TODO: check if the title is not empty and has less than 50 characters and has no spaces
-  } while (title.length() > 50);
+
+  } while (title.length() > MAX_TITLE);
 
   pagesAmount = readAmountOfPages();
-  // TODO: check if is a number and if estoura bitsegmentation fault
 
   return Book(title.c_str(), pagesAmount);
-}
-
-Book::Book(const char newTitle[50], int newPagesAmount)
-{
-  strcpy(title, newTitle);
-  // TODO: check size validation
-  pagesAmount = newPagesAmount;
 }
 
 void fillBookGroup(Book bookGroup[], int n)
@@ -156,4 +159,9 @@ void jokeAgain(Book books[], int size)
   swapPageAmounts(
       max,
       min);
+}
+
+bool isPageAmountValid(int n)
+{
+  return n >= MIN_PAGE && n <= MAX_PAGE;
 }

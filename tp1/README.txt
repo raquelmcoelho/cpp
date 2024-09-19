@@ -1,12 +1,12 @@
 1 Échauffement (sans ordinateur, répondre dans README.txt)
 Qu’affiche le code du listing 1 sur sa sortie standard ?
->>> il affiche "x vaut 5"
+   il affiche "x vaut 5"
 
 Expliquez ce qui se produit à la ligne 6, 7 et 8.
->>> dans la ligne 6 est fait une reference de la variable x
->>> ensuite le r reçois le value de la variable y
->>> enfin le r reçois le rvalue 5
->>> comment la reference a changer de valeur, la variable original va changer aussi
+   dans la ligne 6 est fait une reference de la variable x
+   ensuite le r reçois le value de la variable y
+   enfin le r reçois le rvalue 5
+   comment la reference a changer de valeur, la variable original va changer aussi
 
 
 
@@ -44,6 +44,23 @@ a) Expliquez le message du compilateur.
 Si readBook() est la fonction de lecture sans arguments répondant à la question 2.2.2
 et swapPageCount() est celle qui répond à la question 2.4.1, vérifiez que l’instruction
 ci-dessous provoque une erreur de compilation. Expliquez.
+   """
+   main.cpp: In function ‘void testSwap()’:
+   main.cpp:60:38: error: cannot bind non-const lvalue reference of type ‘Book&’ to an rvalue of type ‘Book’
+      60 |     swapPageAmounts(createBookByInput(), createBookByInput());
+         |                     ~~~~~~~~~~~~~~~~~^~
+   In file included from main.cpp:2:
+   book.h:83:28: note:   initializing argument 1 of ‘void swapPageAmounts(Book&, Book&)’
+      83 | void swapPageAmounts(Book &book1, Book &book2);
+         |                      ~~~~~~^~~~~
+   make: *** [Makefile:10: main.o] Error 1
+   """
 
+   En effet, le retour de la fonction de création de livre est un rvalue (right value)
+   et nous essayons de la placer dans le paramètre de la fonction de swap, qui a besoin
+   d'une adresse réelle en mémoire (lvalue) pour modifier les variables.
+
+
+   
 4 Pour aller plus loin (OPTIONNEL)
 Vous trouverez sur la plateforme deux exercices supplémentaires.

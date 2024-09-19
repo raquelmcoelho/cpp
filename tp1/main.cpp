@@ -62,4 +62,5 @@ void testSwap()
 
 int main()
 {
+    return 0;
 }

@@ -1,6 +1,10 @@
 #ifndef BOOK_H
 #define BOOK_H
 
+#define MAX_PAGE 2000
+#define MIN_PAGE 2
+#define MAX_TITLE 50
+
 #include <iostream>
 
 /*
@@ -12,11 +16,11 @@ et le nombre de pages un entier.
 struct Book
 {
 public:
-    char title[50];
+    char title[MAX_TITLE];
     int pagesAmount;
 
     Book();
-    Book(const char newTitle[50], int newPagesAmount);
+    Book(const char newTitle[MAX_TITLE], int newPagesAmount);
 };
 
 /*
@@ -108,5 +112,7 @@ intermédiaires dans lesquelles les résultats des fonctions de recherche (le pl
 plus court) seront stockés. Les fonctions utilisées sont inchangées.
 */
 void jokeAgain(Book books[], int size);
+
+bool isPageAmountValid(int n);
 
 #endif
